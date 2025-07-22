@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+File Extractor UI
+A simple React-based frontend for uploading files or pasting file links to extract and preview JSON fields, designed to work with a Flask backend.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features
+--------
+- File Upload: Upload files directly from your computer to the backend for processing.
+- Paste Link: Paste a URL to a file and submit it for backend extraction.
+- JSON Preview: View the extracted JSON data in a user-friendly format.
+- Toggle Upload Methods: Easily switch between file upload and link paste modes.
 
-## Available Scripts
+Admin Page:
+-----------
+- Add new fields to be extracted from uploaded or linked files.
+- Delete existing fields from the extraction list.
+- Manage the list of fields dynamically without code changes.
 
-In the project directory, you can run:
+Getting Started
+---------------
+**Prerequisites**
+- Node.js (v14 or higher recommended)
+- npm (comes with Node.js)
+- A running instance of the Flask backend
 
-### `npm start`
+Installation
+------------
+1. Clone the repository:
+   Apply to App.js
+   Run
+   ui
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. Install dependencies:
+   Apply to App.js
+   Run
+   install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. Start the development server:
+   Apply to App.js
+   Run
+   start
 
-### `npm test`
+The app will run at http://localhost:3000.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Usage
+-----
+**Upload a File:**
+- Click "Upload File to Extract Fields".
+- Choose a file and click "Upload".
+- View the extracted JSON preview.
 
-### `npm run build`
+**Paste a Link:**
+- Click "Paste Link Instead".
+- Paste your file URL and submit.
+- View the extracted JSON preview.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Switch Methods:**
+- Use the toggle button to switch between file upload and link input.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Admin Page:**
+- Navigate to the Admin page (e.g., /admin).
+- Add new fields to the extraction list.
+- Delete fields you no longer want to extract.
+- Changes take effect immediately for all uploads and link submissions.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Backend API
+-----------
+This UI expects a Flask backend running at http://127.0.0.1:5000 with the following endpoints:
+- POST /upload — Accepts file uploads via multipart/form-data.
+- POST /upload-link — Accepts a JSON body with a link field.
+- GET /fields — Returns the current list of fields to extract.
+- POST /fields — Adds a new field to the extraction list.
+- DELETE /fields/<field_name> — Removes a field from the extraction list.
 
-### `npm run eject`
+All endpoints should return appropriate JSON responses.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Project Structure
+-----------------
+Apply to App.js
+.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Customization
+-------------
+- Update the backend URL in the fetch calls if your backend runs elsewhere.
+- Style the UI by editing App.css and component styles.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+License
+-------
+MIT
