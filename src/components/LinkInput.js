@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 
-function LinkInput({ onSubmit }) {
+function LinkInput({ onSubmit, parentLoading, setParentLoading }) {
     const [link, setLink] = useState('');
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
-    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setLink(e.target.value);
@@ -20,7 +19,7 @@ function LinkInput({ onSubmit }) {
             setError('⚠️ Please paste a link.');
             return;
         }
-        setLoading(true);
+        if (setParentLoading) setParentLoading(true);
         try {
             const res = await fetch('http://127.0.0.1:5000/upload-link', {
                 method: 'POST',
@@ -39,7 +38,7 @@ function LinkInput({ onSubmit }) {
         } catch (err) {
             setError('❌ Link upload failed. Please try again.');
         } finally {
-            setLoading(false);
+            if (setParentLoading) setParentLoading(false);
         }
     };
 
@@ -54,10 +53,10 @@ function LinkInput({ onSubmit }) {
                 placeholder="https://example.com/file.json"
                 style={{ marginLeft: '1rem', width: '300px' }}
                 required
-                disabled={loading}
+                disabled={parentLoading}
             />
-            <button type="submit" style={{ marginLeft: '1rem' }} disabled={loading}>
-                {loading ? 'Submitting...' : 'Submit'}
+            <button type="submit" style={{ marginLeft: '1rem' }} disabled={parentLoading}>
+                {parentLoading ? 'Submitting...' : 'Submit'}
             </button>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {message && <p style={{ color: 'green' }}>{message}</p>}
