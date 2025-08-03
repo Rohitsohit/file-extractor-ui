@@ -17,11 +17,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "npm run build && serverless deploy",
-    "deploy:prod": "npm run build && serverless deploy --stage prod",
-    "deploy:dev": "npm run build && serverless deploy --stage dev",
-    "remove": "serverless remove"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
