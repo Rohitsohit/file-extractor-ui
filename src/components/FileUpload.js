@@ -43,14 +43,11 @@ function FileUpload() {
 
     return (
         <div style={{
-            minHeight: '100vh',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            maxWidth: 1200,
+            margin: '0 auto',
             padding: '2rem',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
         }}>
             <div style={{
-                maxWidth: 1200,
-                margin: '0 auto',
                 background: 'rgba(255, 255, 255, 0.95)',
                 borderRadius: 20,
                 boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',

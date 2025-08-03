@@ -36,9 +36,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "serverless": "^3.38.0",
-    "serverless-single-page-app-plugin": "^2.2.2"
   }
 }
