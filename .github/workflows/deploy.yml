@@ -95,21 +95,7 @@ jobs:
         npm install --production
         cd ..
         
-    - name: Create Lambda function
-      run: |
-        # Create Lambda function if it doesn't exist
-        aws lambda create-function \
-          --function-name file-extractor-ui \
-          --runtime nodejs18.x \
-          --role ${{ secrets.AWS_LAMBDA_ROLE_ARN }} \
-          --handler server.handler \
-          --zip-file fileb://lambda-package.zip \
-          --timeout 30 \
-          --memory-size 512 \
-          --environment Variables='{NODE_ENV=production}' \
-          --region ${{ env.AWS_REGION }} || echo "Function already exists"
-        
-    - name: Update Lambda function
+    - name: Update existing Lambda function
       run: |
         # Create zip file for deployment
         cd lambda-package
@@ -118,20 +104,30 @@ jobs:
         
         # Update Lambda function code
         aws lambda update-function-code \
-          --function-name file-extractor-ui \
+          --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
           --zip-file fileb://lambda-package.zip \
           --region ${{ env.AWS_REGION }}
           
     - name: Update Lambda configuration
       run: |
         aws lambda update-function-configuration \
-          --function-name file-extractor-ui \
+          --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
           --environment Variables='{NODE_ENV=production,REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}}' \
           --timeout 30 \
           --memory-size 512 \
           --region ${{ env.AWS_REGION }}
           
-    - name: Create API Gateway (if needed)
+    - name: Get Lambda function ARN
+      run: |
+        FUNCTION_ARN=$(aws lambda get-function \
+          --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
+          --region ${{ env.AWS_REGION }} \
+          --query 'Configuration.FunctionArn' \
+          --output text)
+        echo "Lambda Function ARN: $FUNCTION_ARN"
+        echo "::set-output name=function-arn::$FUNCTION_ARN"
+        
+    - name: Create or update API Gateway
       run: |
         # Check if API Gateway exists
         API_ID=$(aws apigateway get-rest-apis --query 'items[?name==`file-extractor-ui-api`].id' --output text --region ${{ env.AWS_REGION }})
@@ -175,16 +171,28 @@ jobs:
             --region ${{ env.AWS_REGION }}
           
           # Set up Lambda integration
+          FUNCTION_ARN=$(aws lambda get-function \
+            --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
+            --region ${{ env.AWS_REGION }} \
+            --query 'Configuration.FunctionArn' \
+            --output text)
+          
           aws apigateway put-integration \
             --rest-api-id $API_ID \
             --resource-id $PROXY_ID \
             --http-method ANY \
             --type AWS_PROXY \
             --integration-http-method POST \
-            --uri arn:aws:apigateway:${{ env.AWS_REGION }}:lambda:path/2015-03-31/functions/arn:aws:lambda:${{ env.AWS_REGION }}:${{ secrets.AWS_ACCOUNT_ID }}:function:file-extractor-ui/invocations \
+            --uri arn:aws:apigateway:${{ env.AWS_REGION }}:lambda:path/2015-03-31/functions/$FUNCTION_ARN/invocations \
             --region ${{ env.AWS_REGION }}
           
           # Deploy API
+          aws apigateway create-deployment \
+            --rest-api-id $API_ID \
+            --stage-name prod \
+            --region ${{ env.AWS_REGION }}
+        else
+          # Update existing API Gateway deployment
           aws apigateway create-deployment \
             --rest-api-id $API_ID \
             --stage-name prod \
@@ -193,8 +201,14 @@ jobs:
         
     - name: Add Lambda permission for API Gateway
       run: |
+        FUNCTION_ARN=$(aws lambda get-function \
+          --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
+          --region ${{ env.AWS_REGION }} \
+          --query 'Configuration.FunctionArn' \
+          --output text)
+        
         aws lambda add-permission \
-          --function-name file-extractor-ui \
+          --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
           --statement-id apigateway-prod \
           --action lambda:InvokeFunction \
           --principal apigateway.amazonaws.com \
