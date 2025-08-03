@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getApiUrl, API_CONFIG } from '../config/api';
+import { getApiUrl } from '../config/api';
 
 const FieldEditor = () => {
     const [field, setField] = useState("");
