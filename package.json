@@ -17,7 +17,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && serverless deploy",
+    "deploy:prod": "npm run build && serverless deploy --stage prod",
+    "deploy:dev": "npm run build && serverless deploy --stage dev",
+    "remove": "serverless remove"
   },
   "eslintConfig": {
     "extends": [
@@ -36,5 +40,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "serverless": "^3.38.0",
+    "serverless-single-page-app-plugin": "^2.2.2"
   }
 }

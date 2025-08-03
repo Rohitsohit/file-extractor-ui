@@ -1,0 +1,43 @@
+service: file-extractor-ui
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  stage: ${opt:stage, 'prod'}
+  environment:
+    NODE_ENV: production
+    REACT_APP_API_URL: ${env:REACT_APP_API_URL}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+      Resource: "arn:aws:logs:*:*:*"
+
+functions:
+  app:
+    handler: server.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
+      - http:
+          path: /
+          method: ANY
+          cors: true
+    environment:
+      REACT_APP_API_URL: ${env:REACT_APP_API_URL}
+    timeout: 30
+    memorySize: 512
+
+plugins:
+  - serverless-single-page-app-plugin
+
+custom:
+  spa:
+    bucketName: file-extractor-ui-${self:provider.stage}
+    indexDocument: index.html
+    errorDocument: index.html 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getApiUrl, API_CONFIG } from '../config/api';
 
 function LinkInput({ onSubmit, parentLoading, setParentLoading }) {
     const [link, setLink] = useState('');
@@ -21,7 +22,7 @@ function LinkInput({ onSubmit, parentLoading, setParentLoading }) {
         }
         if (setParentLoading) setParentLoading(true);
         try {
-            const res = await fetch('http://127.0.0.1:5000/upload-link', {
+            const res = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.UPLOAD_LINK), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

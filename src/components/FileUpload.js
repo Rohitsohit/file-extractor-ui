@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import JsonFromApi from './JsonPreview';
 import LinkInput from './LinkInput';
+import { getApiUrl, API_CONFIG } from '../config/api';
 
 function FileUpload() {
     const [file, setFile] = useState(null);
@@ -23,7 +24,7 @@ function FileUpload() {
         const formData = new FormData();
         formData.append('file', file);
         try {
-            const res = await fetch('http://127.0.0.1:5000/upload', {
+            const res = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.UPLOAD), {
                 method: 'POST',
                 body: formData,
             });
