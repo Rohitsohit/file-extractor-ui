@@ -60,7 +60,7 @@ function JsonFromApi({ jsonData }) {
                 height: '4px',
                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
             }} />
-            
+
             <button
                 onClick={() => downloadJson(jsonData)}
                 style={{
@@ -89,7 +89,7 @@ function JsonFromApi({ jsonData }) {
             >
                 📥 Download JSON
             </button>
-            
+
             <div style={{
                 textAlign: 'center',
                 color: '#667eea',
@@ -101,10 +101,10 @@ function JsonFromApi({ jsonData }) {
             }}>
                 {file}
             </div>
-            
-            {Array.isArray(preview) && preview.length > 0 ? (
+
+            {preview && typeof preview === 'object' && Object.keys(preview).length > 0 ? (
                 <div>
-                    {preview.map((item, idx) => (
+                    {Object.entries(preview).map(([field, details], idx) => (
                         <div key={idx} style={{
                             background: idx % 2 === 0 ? 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
                             borderRadius: 16,
@@ -113,45 +113,41 @@ function JsonFromApi({ jsonData }) {
                             border: '1px solid #e2e8f0',
                             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
                         }}>
-                            {Object.entries(item).map(([field, details]) => (
-                                <div key={field} style={{ marginBottom: 16 }}>
-                                    <div style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        marginBottom: 8,
+                            <div style={{ marginBottom: 16 }}>
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    marginBottom: 8,
+                                }}>
+                                    <span style={{
+                                        color: '#667eea',
+                                        fontWeight: 700,
+                                        fontSize: '1.1rem',
                                     }}>
+                                        {field}
+                                    </span>
+                                    {details && typeof details === 'object' && details.page_number !== undefined && (
                                         <span style={{
-                                            color: '#667eea',
-                                            fontWeight: 700,
-                                            fontSize: '1.1rem',
+                                            color: '#94a3b8',
+                                            marginLeft: 12,
+                                            fontSize: '0.9rem',
+                                            background: '#f1f5f9',
+                                            padding: '4px 8px',
+                                            borderRadius: 6,
+                                            fontWeight: 500,
                                         }}>
-                                            {field}
+                                            Page {details.page_number}
                                         </span>
-                                        {typeof details === 'object' && details !== null && details.page_number !== undefined && (
-                                            <span style={{
-                                                color: '#94a3b8',
-                                                marginLeft: 12,
-                                                fontSize: '0.9rem',
-                                                background: '#f1f5f9',
-                                                padding: '4px 8px',
-                                                borderRadius: 6,
-                                                fontWeight: 500,
-                                            }}>
-                                                Page {details.page_number}
-                                            </span>
-                                        )}
-                                    </div>
-                                    {typeof details === 'object' && details !== null ? (
-                                        <div style={{ marginLeft: 8 }}>
-                                            {renderValue(details.value)}
-                                        </div>
-                                    ) : (
-                                        <div style={{ marginLeft: 8 }}>
-                                            {renderValue(details)}
-                                        </div>
                                     )}
                                 </div>
-                            ))}
+                                <div style={{ marginLeft: 8 }}>
+                                    {details && typeof details === 'object' ? (
+                                        renderValue(details.value)
+                                    ) : (
+                                        renderValue(details)
+                                    )}
+                                </div>
+                            </div>
                         </div>
                     ))}
                 </div>

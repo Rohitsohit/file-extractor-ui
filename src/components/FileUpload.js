@@ -10,32 +10,41 @@ function FileUpload() {
     const [showLinkInput, setShowLinkInput] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const [uploadComplete, setUploadComplete] = useState(false);
+
     const handleChange = (event) => {
-        setFile(event.target.files[0]);
+        const selected = event.target.files[0];
+        setFile(selected);
+        // Auto-start upload when a file is selected
+        if (selected) {
+            handleUpload(selected);
+        }
     };
 
-    const handleUpload = async () => {
-        if (!file) {
+    const handleUpload = async (selectedFile = file) => {
+        console.log('Uploading file:', selectedFile);
+        if (!selectedFile) {
             setMessage('⚠️ Please select a file.');
             return;
         }
         setLoading(true);
-        setMessage('');
+        setShowLinkInput(false);
+        setUploadComplete(false);
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append('file', selectedFile);
         try {
-            const res = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.UPLOAD), {
+            const res = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.EXTRACT), {
                 method: 'POST',
                 body: formData,
             });
             if (!res.ok) throw new Error('Upload failed');
             const data = await res.json();
-            setMessage('✅ File uploaded successfully!');
+            setUploadComplete(true);
             setJsonData(data)
             console.log(data); // show response
         } catch (err) {
             console.error(err);
-            setMessage('❌ Upload failed. Please try again.');
+            setMessage('❌ failed. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -68,7 +77,7 @@ function FileUpload() {
                         marginBottom: '0.5rem',
                         textShadow: '0 2px 4px rgba(0,0,0,0.1)',
                     }}>
-                        File Extractor
+                        Royality Extractor
                     </h1>
                     <p style={{
                         fontSize: '1.1rem',
@@ -76,7 +85,7 @@ function FileUpload() {
                         margin: 0,
                         fontWeight: 300,
                     }}>
-                        Upload files or paste links to extract and preview JSON data
+                        Upload files or paste links to extract contract details
                     </p>
                 </div>
 
@@ -103,7 +112,7 @@ function FileUpload() {
                                 transform: 'translateX(-100%)',
                                 transition: 'transform 0.6s ease',
                             }} />
-                            
+
                             <div style={{
                                 fontSize: '4rem',
                                 marginBottom: '1rem',
@@ -156,17 +165,8 @@ function FileUpload() {
                                     boxShadow: file ? '0 4px 12px rgba(102, 126, 234, 0.4)' : 'none',
                                 }}
                             >
-                                {loading ? 'Uploading...' : 'Upload File'}
+                                {loading ? 'Extracting Contract Details......' : 'Upload File'}
                             </button>
-                            {file && (
-                                <p style={{
-                                    marginTop: '1rem',
-                                    color: '#059669',
-                                    fontWeight: 500,
-                                }}>
-                                    Selected: {file.name}
-                                </p>
-                            )}
                         </div>
                     ) : (
                         <div style={{
@@ -242,7 +242,7 @@ function FileUpload() {
                                 color: '#64748b',
                                 fontWeight: 500,
                             }}>
-                                Processing your request...
+                                Extracting Details from the Contract...
                             </p>
                         </div>
                     )}

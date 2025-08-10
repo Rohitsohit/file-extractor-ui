@@ -1,8 +1,8 @@
 // API Configuration
 export const API_CONFIG = {
-    BASE_URL: process.env.REACT_APP_API_URL || 'http://127.0.0.1:5000',
+    BASE_URL: 'https://jow0ntjcq1.execute-api.us-east-2.amazonaws.com/v1',
     ENDPOINTS: {
-        UPLOAD: '/upload',
+        EXTRACT: '/extract',
         UPLOAD_LINK: '/upload-link',
     }
 };

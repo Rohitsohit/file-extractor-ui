@@ -5,7 +5,7 @@ import FieldEditor from './components/FileEditor';
 
 function Navigation() {
   const location = useLocation();
-  
+
   const isActive = (path) => {
     return location.pathname === path;
   };
@@ -41,7 +41,7 @@ function Navigation() {
               fontWeight: 700,
               color: 'white',
             }}>
-              📁
+              📄
             </div>
             <span style={{
               fontSize: '1.25rem',
@@ -49,17 +49,17 @@ function Navigation() {
               color: 'white',
               letterSpacing: 0.5,
             }}>
-              File Extractor
+              Royality Extractor
             </span>
           </div>
         </div>
-        
+
         <div style={{
           display: 'flex',
           gap: '1rem',
         }}>
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             style={{
               padding: '0.75rem 1.5rem',
               borderRadius: 12,
@@ -89,9 +89,9 @@ function Navigation() {
           >
             📤 Upload Files
           </Link>
-          
-          <Link 
-            to="/admin" 
+
+          <Link
+            to="/admin"
             style={{
               padding: '0.75rem 1.5rem',
               borderRadius: 12,
