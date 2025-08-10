@@ -10,8 +10,6 @@ function FileUpload() {
     const [showLinkInput, setShowLinkInput] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const [uploadComplete, setUploadComplete] = useState(false);
-
     const handleChange = (event) => {
         const selected = event.target.files[0];
         setFile(selected);
@@ -29,7 +27,6 @@ function FileUpload() {
         }
         setLoading(true);
         setShowLinkInput(false);
-        setUploadComplete(false);
         const formData = new FormData();
         formData.append('file', selectedFile);
         try {
@@ -39,7 +36,6 @@ function FileUpload() {
             });
             if (!res.ok) throw new Error('Upload failed');
             const data = await res.json();
-            setUploadComplete(true);
             setJsonData(data)
             console.log(data); // show response
         } catch (err) {
