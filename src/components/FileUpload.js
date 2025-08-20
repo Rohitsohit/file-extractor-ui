@@ -73,7 +73,7 @@ function FileUpload() {
                         marginBottom: '0.5rem',
                         textShadow: '0 2px 4px rgba(0,0,0,0.1)',
                     }}>
-                        Royality Extractor
+                        Royalty Extractor
                     </h1>
                     <p style={{
                         fontSize: '1.1rem',

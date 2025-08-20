@@ -49,7 +49,7 @@ function Navigation() {
               color: 'white',
               letterSpacing: 0.5,
             }}>
-              Royality Extractor
+              Royalty Extractor
             </span>
           </div>
         </div>
