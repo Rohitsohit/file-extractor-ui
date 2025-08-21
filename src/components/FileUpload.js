@@ -61,7 +61,7 @@ function FileUpload() {
                 overflow: 'hidden',
             }}>
                 <div style={{
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    background: '#E3E8EF',
                     padding: '2rem',
                     textAlign: 'center',
                     color: 'white',
@@ -72,14 +72,16 @@ function FileUpload() {
                         margin: 0,
                         marginBottom: '0.5rem',
                         textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                        color: '#1f2937',
                     }}>
-                        Royalty Extractor
+                        Contract Data Extract
                     </h1>
                     <p style={{
                         fontSize: '1.1rem',
                         opacity: 0.9,
                         margin: 0,
                         fontWeight: 300,
+                        color: '#1f2937'
                     }}>
                         Upload files or paste links to extract contract details
                     </p>
@@ -149,7 +151,7 @@ function FileUpload() {
                                 onClick={handleUpload}
                                 disabled={loading || !file}
                                 style={{
-                                    background: file ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#e2e8f0',
+                                    background: file ? '#1f2937' : '#e2e8f0',
                                     color: file ? 'white' : '#94a3b8',
                                     border: 'none',
                                     borderRadius: 12,
@@ -158,7 +160,7 @@ function FileUpload() {
                                     fontWeight: 600,
                                     cursor: file ? 'pointer' : 'not-allowed',
                                     transition: 'all 0.3s ease',
-                                    boxShadow: file ? '0 4px 12px rgba(102, 126, 234, 0.4)' : 'none',
+                                    boxShadow: file ? '0 4px 12px rgba(31, 41, 55, 0.4)' : 'none',
                                 }}
                             >
                                 {loading ? 'Extracting Contract Details......' : 'Upload File'}
@@ -228,14 +230,14 @@ function FileUpload() {
                                 display: 'inline-block',
                                 width: '40px',
                                 height: '40px',
-                                border: '4px solid #f3f4f6',
-                                borderTop: '4px solid #667eea',
+                                border: '4px solid #e2e8f0',
+                                borderTop: '4px solid #1f2937',
                                 borderRadius: '50%',
                                 animation: 'spin 1s linear infinite',
                             }} />
                             <p style={{
                                 marginTop: '1rem',
-                                color: '#64748b',
+                                color: '#1f2937',
                                 fontWeight: 500,
                             }}>
                                 Extracting Details from the Contract...

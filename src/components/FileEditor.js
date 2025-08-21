@@ -37,7 +37,7 @@ const FieldEditor = () => {
 
         setLoading(true);
         setMessage("");
-        
+
         try {
             const response = await fetch(getApiUrl("/add_field"), {
                 method: "POST",
@@ -70,7 +70,7 @@ const FieldEditor = () => {
 
         setLoading(true);
         setMessage("");
-        
+
         try {
             const response = await fetch(getApiUrl(`/delete_field/${encodeURIComponent(fieldKey)}`), {
                 method: "DELETE",
@@ -93,9 +93,11 @@ const FieldEditor = () => {
 
     return (
         <div style={{
-            maxWidth: 1200,
+            maxWidth: 1100,
             margin: '0 auto',
             padding: '2rem',
+            overflow: 'hidden',
+            position: 'relative',
         }}>
             <div style={{
                 background: 'rgba(255, 255, 255, 0.95)',
@@ -106,10 +108,10 @@ const FieldEditor = () => {
                 overflow: 'hidden',
             }}>
                 <div style={{
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    background: '#E3E8EF',
                     padding: '2rem',
                     textAlign: 'center',
-                    color: 'white',
+                    color: '#1f2937',
                 }}>
                     <h1 style={{
                         fontSize: '2.5rem',
@@ -117,6 +119,7 @@ const FieldEditor = () => {
                         margin: 0,
                         marginBottom: '0.5rem',
                         textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                        color: '#1f2937',
                     }}>
                         Admin Panel
                     </h1>
@@ -125,6 +128,7 @@ const FieldEditor = () => {
                         opacity: 0.9,
                         margin: 0,
                         fontWeight: 300,
+                        color: '#1f2937',
                     }}>
                         Manage extraction fields and configuration
                     </p>
@@ -156,7 +160,7 @@ const FieldEditor = () => {
                             }}>
                                 ➕ Add New Field
                             </h3>
-                            
+
                             <form onSubmit={handleSubmit}>
                                 <div style={{ marginBottom: '1.5rem' }}>
                                     <label style={{
@@ -194,7 +198,7 @@ const FieldEditor = () => {
                                         }}
                                     />
                                 </div>
-                                
+
                                 <div style={{ marginBottom: '2rem' }}>
                                     <label style={{
                                         display: 'block',
@@ -232,13 +236,13 @@ const FieldEditor = () => {
                                         }}
                                     />
                                 </div>
-                                
+
                                 <button
                                     type="submit"
                                     disabled={loading}
                                     style={{
                                         width: '100%',
-                                        background: loading ? '#e2e8f0' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                        background: loading ? '#e2e8f0' : '#1f2937',
                                         color: loading ? '#94a3b8' : 'white',
                                         border: 'none',
                                         borderRadius: 12,
@@ -247,7 +251,7 @@ const FieldEditor = () => {
                                         fontWeight: 600,
                                         cursor: loading ? 'not-allowed' : 'pointer',
                                         transition: 'all 0.3s ease',
-                                        boxShadow: loading ? 'none' : '0 4px 12px rgba(102, 126, 234, 0.4)',
+                                        boxShadow: loading ? 'none' : '0 4px 12px rgba(31, 41, 55, 0.4)',
                                     }}
                                 >
                                     {loading ? 'Adding...' : 'Add Field'}
@@ -286,7 +290,7 @@ const FieldEditor = () => {
                                     }} />
                                 )}
                             </h3>
-                            
+
                             <div style={{
                                 maxHeight: '400px',
                                 overflowY: 'auto',

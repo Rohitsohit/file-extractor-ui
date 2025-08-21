@@ -12,7 +12,7 @@ function renderValue(value) {
             }}>
                 {Object.entries(value).map(([k, v]) => (
                     <div key={k} style={{ marginBottom: 4 }}>
-                        <span style={{ color: '#667eea', fontWeight: 600 }}>{k}:</span> <span style={{ color: '#374151' }}>{v}</span>
+                        <span style={{ color: '#1f2937', fontWeight: 600 }}>{k}:</span> <span style={{ color: '#1f2937' }}>{v}</span>
                     </div>
                 ))}
             </div>
@@ -58,7 +58,7 @@ function JsonFromApi({ jsonData }) {
                 left: 0,
                 right: 0,
                 height: '4px',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                background: '#cbd5e1',
             }} />
 
             <button
@@ -67,7 +67,7 @@ function JsonFromApi({ jsonData }) {
                     position: 'absolute',
                     top: 24,
                     right: 32,
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    background: '#1f2937',
                     color: '#fff',
                     border: 'none',
                     borderRadius: 12,
@@ -75,16 +75,16 @@ function JsonFromApi({ jsonData }) {
                     cursor: 'pointer',
                     fontWeight: 600,
                     fontSize: '0.9rem',
-                    boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)',
+                    boxShadow: '0 4px 12px rgba(31, 41, 55, 0.3)',
                     transition: 'all 0.3s ease',
                 }}
                 onMouseEnter={(e) => {
                     e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 6px 16px rgba(102, 126, 234, 0.4)';
+                    e.target.style.boxShadow = '0 6px 16px rgba(31, 41, 55, 0.4)';
                 }}
                 onMouseLeave={(e) => {
                     e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.3)';
+                    e.target.style.boxShadow = '0 4px 12px rgba(31, 41, 55, 0.3)';
                 }}
             >
                 📥 Download JSON
@@ -92,12 +92,12 @@ function JsonFromApi({ jsonData }) {
 
             <div style={{
                 textAlign: 'center',
-                color: '#667eea',
+                color: '#1f2937',
                 fontSize: '2rem',
                 fontWeight: 700,
                 marginBottom: 32,
                 letterSpacing: 1,
-                textShadow: '0 2px 4px rgba(102, 126, 234, 0.1)',
+                textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
             }}>
                 {file}
             </div>
@@ -106,7 +106,7 @@ function JsonFromApi({ jsonData }) {
                 <div>
                     {Object.entries(preview).map(([field, details], idx) => (
                         <div key={idx} style={{
-                            background: idx % 2 === 0 ? 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+                            background: idx % 2 === 0 ? '#f8fafc' : '#ffffff',
                             borderRadius: 16,
                             padding: 24,
                             marginBottom: 20,
@@ -120,7 +120,7 @@ function JsonFromApi({ jsonData }) {
                                     marginBottom: 8,
                                 }}>
                                     <span style={{
-                                        color: '#667eea',
+                                        color: '#1f2937',
                                         fontWeight: 700,
                                         fontSize: '1.1rem',
                                     }}>

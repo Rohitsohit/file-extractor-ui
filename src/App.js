@@ -12,7 +12,7 @@ function Navigation() {
 
   return (
     <nav style={{
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: '#E3E8EF',
       padding: '1rem 2rem',
       boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
       position: 'sticky',
@@ -36,21 +36,12 @@ function Navigation() {
             alignItems: 'center',
             gap: '0.5rem',
           }}>
-            <div style={{
-              fontSize: '1.5rem',
-              fontWeight: 700,
-              color: 'white',
-            }}>
-              📄
-            </div>
-            <span style={{
-              fontSize: '1.25rem',
-              fontWeight: 700,
-              color: 'white',
-              letterSpacing: 0.5,
-            }}>
-              Royalty Extractor
-            </span>
+            <img
+              src="/RH_Typeface_clean.png"
+              alt="Logo"
+              style={{ height: '16px' }}
+            />
+
           </div>
         </div>
 
@@ -64,26 +55,26 @@ function Navigation() {
               padding: '0.75rem 1.5rem',
               borderRadius: 12,
               textDecoration: 'none',
-              color: isActive('/') ? 'white' : 'rgba(255, 255, 255, 0.8)',
-              background: isActive('/') ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
+              color: isActive('/') ? '#1f2937' : '#1f2937',
+              background: isActive('/') ? '#cbd5e1' : 'transparent',
               fontWeight: 600,
               fontSize: '0.9rem',
               transition: 'all 0.3s ease',
-              border: isActive('/') ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid transparent',
+              border: isActive('/') ? '1px solid #94a3b8' : '1px solid transparent',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
             }}
             onMouseEnter={(e) => {
               if (!isActive('/')) {
-                e.target.style.background = 'rgba(255, 255, 255, 0.1)';
-                e.target.style.color = 'white';
+                e.target.style.background = '#e2e8f0';
+                e.target.style.color = '#1f2937';
               }
             }}
             onMouseLeave={(e) => {
               if (!isActive('/')) {
                 e.target.style.background = 'transparent';
-                e.target.style.color = 'rgba(255, 255, 255, 0.8)';
+                e.target.style.color = '#1f2937';
               }
             }}
           >
@@ -96,26 +87,26 @@ function Navigation() {
               padding: '0.75rem 1.5rem',
               borderRadius: 12,
               textDecoration: 'none',
-              color: isActive('/admin') ? 'white' : 'rgba(255, 255, 255, 0.8)',
-              background: isActive('/admin') ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
+              color: isActive('/admin') ? '#1f2937' : '#1f2937',
+              background: isActive('/admin') ? '#cbd5e1' : 'transparent',
               fontWeight: 600,
               fontSize: '0.9rem',
               transition: 'all 0.3s ease',
-              border: isActive('/admin') ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid transparent',
+              border: isActive('/admin') ? '1px solid #94a3b8' : '1px solid transparent',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
             }}
             onMouseEnter={(e) => {
               if (!isActive('/admin')) {
-                e.target.style.background = 'rgba(255, 255, 255, 0.1)';
-                e.target.style.color = 'white';
+                e.target.style.background = '#e2e8f0';
+                e.target.style.color = '#1f2937';
               }
             }}
             onMouseLeave={(e) => {
               if (!isActive('/admin')) {
                 e.target.style.background = 'transparent';
-                e.target.style.color = 'rgba(255, 255, 255, 0.8)';
+                e.target.style.color = '#1f2937';
               }
             }}
           >
